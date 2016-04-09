@@ -29,16 +29,23 @@ package ATTHackPause;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.oracle.javafx.jmx.json.JSONReader;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class Main {
 
@@ -65,13 +72,24 @@ public class Main {
             }
 
             HttpPost httpPost = new HttpPost("https://api-m2x.att.com/v2/devices/ecbcc13b43417c6d9e1dc7618bbb1e6c/streams/Distance/values");
-            List <NameValuePair> nvps = new ArrayList <NameValuePair>();
-            nvps.add(new BasicNameValuePair("value", "15"));
-            nvps.add(new BasicNameValuePair("timestamp", "2016-04-09T19:37:42+00:00"));
-            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+           // List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+           // nvps.add(new BasicNameValuePair("value", "15"));
+           // nvps.add(new BasicNameValuePair("timestamp", "2016-04-09T19:37:42+00:00"));
+           // httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+
+
+            String jsonString = "{\"values\":[{\"value\": \"99\",\"timestamp\": \"2016-04-09T20:43:49+00:00\"}]}";
+            System.out.println("\n\njsonString: " + jsonString);
+//            JSONArray jsonArray = new JSONArray(jsonString);
+//            System.out.println("\n\njsonArray: " + jsonArray);
+            StringEntity se = new StringEntity(jsonString);
+            httpPost.setEntity(se);
+
             httpPost.setHeader("Content-type", "application/json");
             httpPost.setHeader("X-M2X-KEY", "20bfa4a4f5ed88f94d772e8389e9a6d0");
             CloseableHttpResponse response2 = httpclient.execute(httpPost);
+
+
 
             try {
                 System.out.println(response2.getStatusLine());
