@@ -79,7 +79,7 @@ public class Main {
 
 
             String jsonString = "{\"values\":[{\"value\": \"99\",\"timestamp\": \"2016-04-09T20:43:49+00:00\"}]}";
-            System.out.println("\n\njsonString: " + jsonString);
+            //System.out.println("\n\njsonString: " + jsonString);
 //            JSONArray jsonArray = new JSONArray(jsonString);
 //            System.out.println("\n\njsonArray: " + jsonArray);
             StringEntity se = new StringEntity(jsonString);
